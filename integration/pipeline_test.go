@@ -478,7 +478,7 @@ Alice
 		baseTime.Add(7*time.Hour).Format(time.RFC1123Z),
 	)
 
-	return os.WriteFile(path, []byte(mbox), 0644)
+	return os.WriteFile(path, []byte(mbox), 0600)
 }
 
 // TestSessionRoundTrip tests that session save/load preserves data correctly.

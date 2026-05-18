@@ -54,7 +54,7 @@ References: <msg001@example.com>
 This is a reply.
 `
 
-	if err := os.WriteFile(mboxPath, []byte(mboxContent), 0644); err != nil {
+	if err := os.WriteFile(mboxPath, []byte(mboxContent), 0600); err != nil {
 		t.Fatalf("Failed to create test mbox: %v", err)
 	}
 
@@ -133,7 +133,7 @@ Message-ID: <msg002@example.com>
 New content.
 `
 
-	if err := os.WriteFile(mboxPath, []byte(mboxContent), 0644); err != nil {
+	if err := os.WriteFile(mboxPath, []byte(mboxContent), 0600); err != nil {
 		t.Fatalf("Failed to create test mbox: %v", err)
 	}
 
@@ -183,7 +183,7 @@ Body text.
 
 `
 	}
-	if err := os.WriteFile(mboxPath, []byte(content), 0644); err != nil {
+	if err := os.WriteFile(mboxPath, []byte(content), 0600); err != nil {
 		t.Fatalf("Failed to create test mbox: %v", err)
 	}
 
@@ -415,7 +415,7 @@ type testSource struct {
 	location string
 }
 
-func (s *testSource) Type() string       { return "mbox" }
-func (s *testSource) Location() string   { return s.location }
-func (s *testSource) Credentials() any   { return nil }
-func (s *testSource) Options() any       { return nil }
+func (s *testSource) Type() string     { return "mbox" }
+func (s *testSource) Location() string { return s.location }
+func (s *testSource) Credentials() any { return nil }
+func (s *testSource) Options() any     { return nil }

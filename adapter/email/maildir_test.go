@@ -58,10 +58,10 @@ Message-ID: <msg002@example.com>
 This is sent message.
 `
 
-	if err := os.WriteFile(filepath.Join(inboxDir, "msg001.eml"), []byte(msg1), 0644); err != nil {
+	if err := os.WriteFile(filepath.Join(inboxDir, "msg001.eml"), []byte(msg1), 0600); err != nil {
 		t.Fatalf("Failed to write inbox message: %v", err)
 	}
-	if err := os.WriteFile(filepath.Join(sentDir, "msg002.eml"), []byte(msg2), 0644); err != nil {
+	if err := os.WriteFile(filepath.Join(sentDir, "msg002.eml"), []byte(msg2), 0600); err != nil {
 		t.Fatalf("Failed to write sent message: %v", err)
 	}
 
@@ -136,10 +136,10 @@ Message-ID: <msg002@example.com>
 New content.
 `
 
-	if err := os.WriteFile(filepath.Join(tmpDir, "old.eml"), []byte(msg1), 0644); err != nil {
+	if err := os.WriteFile(filepath.Join(tmpDir, "old.eml"), []byte(msg1), 0600); err != nil {
 		t.Fatalf("Failed to write old message: %v", err)
 	}
-	if err := os.WriteFile(filepath.Join(tmpDir, "new.eml"), []byte(msg2), 0644); err != nil {
+	if err := os.WriteFile(filepath.Join(tmpDir, "new.eml"), []byte(msg2), 0600); err != nil {
 		t.Fatalf("Failed to write new message: %v", err)
 	}
 
@@ -189,7 +189,7 @@ Message-ID: <msg001@example.com>
 Content.
 `
 
-	if err := os.WriteFile(filepath.Join(deepDir, "msg.eml"), []byte(msg), 0644); err != nil {
+	if err := os.WriteFile(filepath.Join(deepDir, "msg.eml"), []byte(msg), 0600); err != nil {
 		t.Fatalf("Failed to write message: %v", err)
 	}
 
@@ -235,10 +235,10 @@ Message-ID: <hidden@example.com>
 Content.
 `
 
-	if err := os.WriteFile(filepath.Join(tmpDir, "visible.eml"), []byte(msg), 0644); err != nil {
+	if err := os.WriteFile(filepath.Join(tmpDir, "visible.eml"), []byte(msg), 0600); err != nil {
 		t.Fatalf("Failed to write visible message: %v", err)
 	}
-	if err := os.WriteFile(filepath.Join(tmpDir, ".hidden.eml"), []byte(hiddenMsg), 0644); err != nil {
+	if err := os.WriteFile(filepath.Join(tmpDir, ".hidden.eml"), []byte(hiddenMsg), 0600); err != nil {
 		t.Fatalf("Failed to write hidden message: %v", err)
 	}
 
@@ -279,7 +279,7 @@ Message-ID: <msg@example.com>
 Body.
 `
 		filename := filepath.Join(tmpDir, "msg"+string(rune('0'+i%10))+".eml")
-		if err := os.WriteFile(filename, []byte(msg), 0644); err != nil {
+		if err := os.WriteFile(filename, []byte(msg), 0600); err != nil {
 			t.Fatalf("Failed to write message: %v", err)
 		}
 	}
@@ -363,7 +363,7 @@ func TestMaildirAdapterMalformedMessage(t *testing.T) {
 	malformed := `This is not a valid email message
 just random text
 `
-	if err := os.WriteFile(filepath.Join(tmpDir, "malformed.eml"), []byte(malformed), 0644); err != nil {
+	if err := os.WriteFile(filepath.Join(tmpDir, "malformed.eml"), []byte(malformed), 0600); err != nil {
 		t.Fatalf("Failed to write malformed message: %v", err)
 	}
 
@@ -376,7 +376,7 @@ Message-ID: <msg001@example.com>
 
 Content.
 `
-	if err := os.WriteFile(filepath.Join(tmpDir, "valid.eml"), []byte(valid), 0644); err != nil {
+	if err := os.WriteFile(filepath.Join(tmpDir, "valid.eml"), []byte(valid), 0600); err != nil {
 		t.Fatalf("Failed to write valid message: %v", err)
 	}
 
@@ -423,7 +423,7 @@ Alice
 `
 
 	msgPath := filepath.Join(tmpDir, "test.eml")
-	if err := os.WriteFile(msgPath, []byte(msg), 0644); err != nil {
+	if err := os.WriteFile(msgPath, []byte(msg), 0600); err != nil {
 		t.Fatalf("Failed to write message: %v", err)
 	}
 

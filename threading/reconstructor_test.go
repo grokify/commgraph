@@ -266,13 +266,13 @@ func TestReconstructWithParticipants(t *testing.T) {
 			Date:      baseTime,
 		},
 		{
-			ID:         "msg-2",
-			MessageID:  "msg-2@example.com",
-			InReplyTo:  "msg-1@example.com",
-			From:       "bob@example.com",
-			To:         []string{"alice@example.com", "carol@example.com"},
-			Subject:    "Re: Hello",
-			Date:       baseTime.Add(time.Hour),
+			ID:        "msg-2",
+			MessageID: "msg-2@example.com",
+			InReplyTo: "msg-1@example.com",
+			From:      "bob@example.com",
+			To:        []string{"alice@example.com", "carol@example.com"},
+			Subject:   "Re: Hello",
+			Date:      baseTime.Add(time.Hour),
 		},
 	}
 
@@ -322,13 +322,13 @@ func TestReconstructThreadDates(t *testing.T) {
 			Date:      startTime,
 		},
 		{
-			ID:         "msg-2",
-			MessageID:  "msg-2@example.com",
-			InReplyTo:  "msg-1@example.com",
-			From:       "bob@example.com",
-			To:         []string{"alice@example.com"},
-			Subject:    "Re: Hello",
-			Date:       endTime,
+			ID:        "msg-2",
+			MessageID: "msg-2@example.com",
+			InReplyTo: "msg-1@example.com",
+			From:      "bob@example.com",
+			To:        []string{"alice@example.com"},
+			Subject:   "Re: Hello",
+			Date:      endTime,
 		},
 	}
 

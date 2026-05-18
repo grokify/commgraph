@@ -4,8 +4,9 @@ package threading
 import (
 	"time"
 
-	"github.com/grokify/commgraph/entity"
 	mogothread "github.com/grokify/mogo/net/mailutil/threading"
+
+	"github.com/grokify/commgraph/entity"
 )
 
 // Config configures thread reconstruction.
