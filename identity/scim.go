@@ -215,6 +215,18 @@ func (r *SCIMResolver) Stats() Stats {
 	}
 }
 
+// AllActors returns all actors in the resolver.
+func (r *SCIMResolver) AllActors() []*entity.Actor {
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+
+	result := make([]*entity.Actor, 0, len(r.actors))
+	for _, actor := range r.actors {
+		result = append(result, actor)
+	}
+	return result
+}
+
 // normalizeEmail normalizes an email address.
 func (r *SCIMResolver) normalizeEmail(addr string) string {
 	// Extract email from "Name <email>" format
