@@ -25,12 +25,13 @@ var pipelineCmd = &cobra.Command{
 }
 
 var (
-	pipelineSource    string
-	pipelineFormat    string
-	pipelineDomains   []string
-	pipelineProfile   string
-	pipelineAlgorithm string
-	pipelineTopN      int
+	pipelineSource      string
+	pipelineFormat      string
+	pipelineDomains     []string
+	pipelineProfile     string
+	pipelineAlgorithm   string
+	pipelineTopN        int
+	pipelineLoadEnron   bool
 )
 
 func init() {
@@ -42,6 +43,7 @@ func init() {
 	pipelineCmd.Flags().StringVarP(&pipelineProfile, "profile", "p", "influence", "weight profile")
 	pipelineCmd.Flags().StringVarP(&pipelineAlgorithm, "algorithm", "a", "pagerank", "analysis algorithm")
 	pipelineCmd.Flags().IntVarP(&pipelineTopN, "top", "n", 20, "show top N results")
+	pipelineCmd.Flags().BoolVar(&pipelineLoadEnron, "enron", false, "load Enron employee identities for alias merging")
 
 	_ = pipelineCmd.MarkFlagRequired("source")
 }
@@ -73,6 +75,13 @@ func runPipeline(cmd *cobra.Command, args []string) error {
 	resolverConfig.InternalDomains = pipelineDomains
 	resolverConfig.AutoCreate = true
 	resolver := identity.NewSCIMResolver(resolverConfig)
+
+	// Load Enron people if requested
+	if pipelineLoadEnron {
+		fmt.Println("Loading Enron employee identities...")
+		count := resolver.LoadEnronPeople()
+		fmt.Printf("  Loaded %d employees with aliases\n", count)
+	}
 
 	// Ingest messages
 	source := adapter.FileSource{

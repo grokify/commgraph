@@ -36,10 +36,35 @@ func NewSCIMResolver(config Config) *SCIMResolver {
 }
 
 // LoadActor adds an actor to the resolver.
+// If an actor with the same ID already exists, emails are merged
+// but existing display name and metadata are preserved.
 func (r *SCIMResolver) LoadActor(actor *entity.Actor) {
 	r.mu.Lock()
 	defer r.mu.Unlock()
 
+	existingActor, exists := r.actors[actor.ID]
+	if exists {
+		// Merge emails into existing actor
+		existingEmails := make(map[string]bool)
+		for _, email := range existingActor.Emails {
+			existingEmails[strings.ToLower(email)] = true
+		}
+
+		newAliases := 0
+		for _, email := range actor.Emails {
+			emailLower := strings.ToLower(email)
+			if !existingEmails[emailLower] {
+				existingActor.Emails = append(existingActor.Emails, emailLower)
+				r.emailToActor[emailLower] = actor.ID
+				existingEmails[emailLower] = true
+				newAliases++
+			}
+		}
+		r.stats.TotalAliases += newAliases
+		return
+	}
+
+	// New actor
 	r.actors[actor.ID] = actor
 
 	// Index all emails
