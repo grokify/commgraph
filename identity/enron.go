@@ -12,19 +12,12 @@ import (
 // LoadEnronPeople loads all known Enron employees into the resolver.
 // This pre-populates the resolver with canonical identities and their aliases,
 // enabling proper merging when the same person uses multiple email addresses.
-// It loads both the curated SCIM data and the custodians JSON data.
 func (r *SCIMResolver) LoadEnronPeople() int {
 	count := 0
 
 	// Load curated SCIM data (has detailed aliases for key people)
 	peopleSet := enronpeople.NewPeopleSet()
 	count += r.LoadSCIMUserSet(peopleSet)
-
-	// Load custodians from JSON (148 employees with auto-generated aliases)
-	custodiansSet, err := enronpeople.NewCustodiansUserSet()
-	if err == nil {
-		count += r.LoadSCIMUserSet(custodiansSet)
-	}
 
 	return count
 }
