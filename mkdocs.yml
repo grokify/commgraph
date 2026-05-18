@@ -59,6 +59,8 @@ nav:
       - Architecture: reference/architecture.md
       - Weight Profiles: reference/weight-profiles.md
       - Roadmap: reference/roadmap.md
+  - Releases:
+      - v0.1.0: releases/v0.1.0.md
 
 extra:
   social:
