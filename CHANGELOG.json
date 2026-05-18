@@ -1,0 +1,71 @@
+{
+  "irVersion": "1.0",
+  "project": "commgraph",
+  "repository": "https://github.com/grokify/commgraph",
+  "versioning": "semver",
+  "commitConvention": "conventional",
+  "maintainers": ["grokify"],
+  "releases": [
+    {
+      "version": "v0.1.0",
+      "date": "2026-05-18",
+      "highlights": [
+        { "description": "Communication graph analysis framework for email corpora with centrality, community detection, and visualization exports" },
+        { "description": "Multi-format email ingestion (mbox, maildir) with identity resolution and thread reconstruction" },
+        { "description": "Gephi (GEXF) and Neo4j (Cypher) export for graph visualization and querying" }
+      ],
+      "added": [
+        { "description": "Core entity types: Actor, Interaction, Message, Thread", "commit": "d8fda34" },
+        { "description": "Weight profile system with influence, information_flow, and coordination profiles", "commit": "b15dcfb" },
+        { "description": "Storage interfaces and in-memory implementation with JSON serialization", "commit": "2871760" },
+        { "description": "Graph abstraction layer using omniretrieve", "commit": "5828369" },
+        { "description": "Identity resolution with SCIM-based actor management and alias merging", "commit": "5828369" },
+        { "description": "Email adapters for mbox and maildir formats with header parsing", "commit": "6d79514" },
+        { "description": "Thread reconstruction using References and In-Reply-To headers", "commit": "07aa33b" },
+        { "description": "Centrality analysis: PageRank, degree (in/out/total), betweenness", "commit": "651ea51" },
+        { "description": "Community detection: Louvain algorithm with configurable resolution", "commit": "ce9bc6b" },
+        { "description": "Temporal analysis with burst detection and activity patterns", "commit": "ce9bc6b" },
+        { "description": "Path analysis: shortest paths, average path length, graph diameter", "commit": "8cbb623" },
+        { "description": "Bridge detection for identifying cross-community connectors", "commit": "ea84fc6" },
+        { "description": "External entity analysis with boundary spanner identification", "commit": "78223b5" },
+        { "description": "GEXF export for Gephi visualization with centrality and community attributes", "commit": "b241eac" },
+        { "description": "Neo4j Cypher export with schema creation and batched statements", "commit": "8a85c99" },
+        { "description": "JSON and CSV export formats for analysis results", "commit": "7cdceeb" },
+        { "description": "CLI with pipeline, ingest, analyze, export, and identity commands", "commit": "475fa72" },
+        { "description": "Session persistence for sharing state across CLI invocations", "commit": "bb54bcc" },
+        { "description": "Configuration file support (.commgraph.yaml) with environment variable overrides", "commit": "7312d7c" },
+        { "description": "Enron corpus support with pre-curated employee identity data via enron-people package", "commit": "3356b41" }
+      ],
+      "fixed": [
+        { "description": "Nil pointer dereference in centrality and bridge detection algorithms", "commit": "4bffb49" },
+        { "description": "Identity resolver call to non-existent function", "commit": "e78df5c" }
+      ],
+      "documentation": [
+        { "description": "Product Requirements Document (PRD) and Technical Requirements Document (TRD)", "commit": "df99d6c" },
+        { "description": "MkDocs documentation site with getting started, user guide, and reference sections", "commit": "e83bc35" },
+        { "description": "Enron corpus tutorial with step-by-step analysis examples", "commit": "e83bc35" },
+        { "description": "CLI reference with all commands, flags, and examples", "commit": "e83bc35" },
+        { "description": "Configuration guide with YAML examples and environment variable mapping", "commit": "e83bc35" }
+      ],
+      "tests": [
+        { "description": "Entity type unit tests for Actor, Interaction, Message, Thread", "commit": "0f8b861" },
+        { "description": "Identity resolution tests for SCIMResolver", "commit": "3d6a98b" },
+        { "description": "Storage tests for MemoryStore operations", "commit": "fbfd735" },
+        { "description": "Analysis algorithm tests for centrality, community, and temporal analysis", "commit": "292aeb8" },
+        { "description": "Email adapter tests for mbox and maildir parsing", "commit": "ed0b227" },
+        { "description": "Thread reconstruction tests", "commit": "bceb943" },
+        { "description": "End-to-end integration tests for full pipeline", "commit": "3d3796d" }
+      ],
+      "dependencies": [
+        { "description": "Add enron-people v0.1.1 for Enron corpus identity data", "commit": "4d42fd6" },
+        { "description": "Add spf13/viper v1.21.0 for configuration file support", "commit": "7312d7c" },
+        { "description": "Add spf13/cobra v1.10.2 for CLI framework", "commit": "35d79c0" },
+        { "description": "Add omniretrieve v0.2.0 for graph abstraction", "commit": "5828369" },
+        { "description": "Add enmime v1.3.0 for MIME email parsing", "commit": "6d79514" }
+      ],
+      "build": [
+        { "description": "GitHub Actions CI workflows for build, lint, and test", "commit": "fb5b379" }
+      ]
+    }
+  ]
+}
