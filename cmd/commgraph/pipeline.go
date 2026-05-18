@@ -309,5 +309,24 @@ func runPipeline(cmd *cobra.Command, args []string) error {
 		}
 	}
 
+	// Run external entity analysis
+	fmt.Println("\nAnalyzing external communication...")
+	externalStart := time.Now()
+	externalResults, err := analyzer.ExternalAnalysis(ctx)
+	if err != nil {
+		fmt.Printf("  External analysis failed: %v\n", err)
+	} else {
+		fmt.Printf("  External actors: %d across %d domains\n",
+			externalResults.Summary.TotalExternalActors, externalResults.Summary.TotalExternalDomains)
+		fmt.Printf("  External interactions: %d (%.1f%% of total)\n",
+			externalResults.Summary.TotalExternalInteractions, externalResults.Summary.ExternalRatio*100)
+		fmt.Printf("  Inbound: %d, Outbound: %d\n",
+			externalResults.Summary.InboundCount, externalResults.Summary.OutboundCount)
+		if len(externalResults.BoundarySpanners) > 0 {
+			fmt.Printf("  Boundary spanners: %d (high external communication)\n", len(externalResults.BoundarySpanners))
+		}
+		fmt.Printf("  Completed in %v\n", time.Since(externalStart))
+	}
+
 	return nil
 }
