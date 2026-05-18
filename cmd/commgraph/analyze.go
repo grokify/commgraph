@@ -7,6 +7,7 @@ import (
 
 	"github.com/grokify/commgraph/analysis"
 	"github.com/grokify/commgraph/export"
+	"github.com/grokify/commgraph/session"
 	"github.com/grokify/commgraph/weight"
 	"github.com/spf13/cobra"
 )
@@ -30,6 +31,7 @@ var (
 	analyzeTopN      int
 	analyzeOutput    string
 	analyzeFormat    string
+	analyzeSession   string
 )
 
 func init() {
@@ -41,14 +43,30 @@ func init() {
 	analyzeCentralityCmd.Flags().IntVarP(&analyzeTopN, "top", "n", 20, "show top N results")
 	analyzeCentralityCmd.Flags().StringVarP(&analyzeOutput, "output", "o", "", "output file (default: stdout)")
 	analyzeCentralityCmd.Flags().StringVarP(&analyzeFormat, "format", "f", "table", "output format (table, json, csv)")
+	analyzeCentralityCmd.Flags().StringVar(&analyzeSession, "session", "", "session file to load (default: .commgraph-session.json)")
 }
 
 func runAnalyzeCentrality(cmd *cobra.Command, args []string) error {
 	ctx := context.Background()
 
-	// Check if data is loaded
+	// Load from session if not already loaded
 	if globalStore == nil {
-		return fmt.Errorf("no data loaded. Run 'commgraph ingest' first")
+		sessionPath := analyzeSession
+		if sessionPath == "" {
+			sessionPath = session.DefaultPath()
+		}
+
+		if !session.Exists(sessionPath) {
+			return fmt.Errorf("no data loaded and no session file found at %s. Run 'commgraph ingest' first", sessionPath)
+		}
+
+		store, resolver, err := session.LoadIntoStore(ctx, sessionPath)
+		if err != nil {
+			return fmt.Errorf("load session: %w", err)
+		}
+		globalStore = store
+		globalResolver = resolver
+		fmt.Printf("Loaded session from %s\n", sessionPath)
 	}
 
 	// Get profile

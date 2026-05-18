@@ -10,6 +10,7 @@ import (
 	"github.com/grokify/commgraph/adapter/email"
 	"github.com/grokify/commgraph/entity"
 	"github.com/grokify/commgraph/identity"
+	"github.com/grokify/commgraph/session"
 	"github.com/grokify/commgraph/storage"
 	"github.com/grokify/commgraph/threading"
 	"github.com/spf13/cobra"
@@ -34,6 +35,7 @@ var (
 	ingestDomains []string
 	ingestOutput  string
 	ingestVerbose bool
+	ingestSession string
 )
 
 func init() {
@@ -45,6 +47,7 @@ func init() {
 	ingestEmailCmd.Flags().StringSliceVarP(&ingestDomains, "internal-domains", "d", []string{}, "internal domains for identity resolution")
 	ingestEmailCmd.Flags().StringVarP(&ingestOutput, "output", "o", "", "output file for stats (JSON)")
 	ingestEmailCmd.Flags().BoolVarP(&ingestVerbose, "verbose", "v", false, "verbose output")
+	ingestEmailCmd.Flags().StringVar(&ingestSession, "session", "", "session file to save (default: .commgraph-session.json)")
 
 	_ = ingestEmailCmd.MarkFlagRequired("source")
 }
@@ -204,6 +207,23 @@ func runIngestEmail(cmd *cobra.Command, args []string) error {
 	// Save to global state for analyze command
 	globalStore = store
 	globalResolver = resolver
+
+	// Save session if requested
+	sessionPath := ingestSession
+	if sessionPath == "" {
+		sessionPath = session.DefaultPath()
+	}
+
+	config := session.SessionConfig{
+		InternalDomains: ingestDomains,
+		AutoCreate:      true,
+		Format:          ingestFormat,
+	}
+
+	if err := session.SaveFromStore(store, resolver, ingestSource, config, sessionPath); err != nil {
+		return fmt.Errorf("save session: %w", err)
+	}
+	fmt.Printf("  Session saved to %s\n", sessionPath)
 
 	return nil
 }
