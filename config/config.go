@@ -49,9 +49,9 @@ type SessionConfig struct {
 
 // ExportConfig configures export defaults.
 type ExportConfig struct {
-	Format        string `mapstructure:"format"`
-	PrettyJSON    bool   `mapstructure:"pretty_json"`
-	Neo4jBatchSize int   `mapstructure:"neo4j_batch_size"`
+	Format         string `mapstructure:"format"`
+	PrettyJSON     bool   `mapstructure:"pretty_json"`
+	Neo4jBatchSize int    `mapstructure:"neo4j_batch_size"`
 }
 
 // Default returns the default configuration.
@@ -77,8 +77,8 @@ func Default() *Config {
 			AutoSave: true,
 		},
 		Export: ExportConfig{
-			Format:        "table",
-			PrettyJSON:    true,
+			Format:         "table",
+			PrettyJSON:     true,
 			Neo4jBatchSize: 500,
 		},
 	}

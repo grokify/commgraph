@@ -64,10 +64,11 @@ func (r *Reconstructor) Reconstruct(messages []*entity.Message) ([]*entity.Threa
 	inner.Reconstruct()
 
 	// Extract results back to messages
+	// G602: adapters and messages have same length (created on line 48-52)
 	for i, adapter := range adapters {
-		messages[i].ThreadID = adapter.info.ThreadID
-		messages[i].ParentID = adapter.info.ParentID
-		messages[i].ThreadDepth = adapter.info.Depth
+		messages[i].ThreadID = adapter.info.ThreadID //nolint:gosec // G602: i bounded by len(adapters) == len(messages)
+		messages[i].ParentID = adapter.info.ParentID //nolint:gosec // G602: i bounded by len(adapters) == len(messages)
+		messages[i].ThreadDepth = adapter.info.Depth //nolint:gosec // G602: i bounded by len(adapters) == len(messages)
 	}
 
 	// Convert threads

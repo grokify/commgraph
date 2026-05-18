@@ -188,6 +188,7 @@ Body text.
 	}
 
 	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
 	a := NewMboxAdapter()
 	source := &testSource{location: mboxPath}
 

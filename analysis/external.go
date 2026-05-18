@@ -164,81 +164,25 @@ func (a *Analyzer) ExternalAnalysis(ctx context.Context) (*ExternalAnalysisResul
 		// Internal to External (outbound)
 		if fromInternal && !toInternal {
 			outboundExternal++
-			internalMetrics[interaction.From].ExternalCount++
-			internalMetrics[interaction.From].TotalCount++
-
-			domain := extractDomain(toActor)
-			internalToDomains[interaction.From][domain]++
-
-			// Track external actor
-			if externalActors[interaction.To] == nil {
-				externalActors[interaction.To] = &ExternalContact{
-					ActorID: interaction.To,
-					Domain:  domain,
-				}
-				if toActor != nil {
-					externalActors[interaction.To].DisplayName = toActor.DisplayName
-				}
-			}
-			externalActors[interaction.To].OutboundCount++
-			externalActors[interaction.To].TotalCount++
-
-			// Track internal-external relationship
-			if externalToInternal[interaction.To] == nil {
-				externalToInternal[interaction.To] = make(map[entity.ActorID]bool)
-			}
-			externalToInternal[interaction.To][interaction.From] = true
-
-			// Track domain stats
-			if domainStats[domain] == nil {
-				domainStats[domain] = &DomainStats{Domain: domain}
-			}
-			domainStats[domain].OutboundCount++
-			domainStats[domain].TotalCount++
-			if domainToInternal[domain] == nil {
-				domainToInternal[domain] = make(map[entity.ActorID]bool)
-			}
-			domainToInternal[domain][interaction.From] = true
+			trackExternalInteraction(
+				interaction.From, interaction.To, toActor,
+				true, // isOutbound
+				internalMetrics, internalToDomains,
+				externalActors, externalToInternal,
+				domainStats, domainToInternal,
+			)
 		}
 
 		// External to Internal (inbound)
 		if !fromInternal && toInternal {
 			inboundExternal++
-			internalMetrics[interaction.To].ExternalCount++
-			internalMetrics[interaction.To].TotalCount++
-
-			domain := extractDomain(fromActor)
-			internalToDomains[interaction.To][domain]++
-
-			// Track external actor
-			if externalActors[interaction.From] == nil {
-				externalActors[interaction.From] = &ExternalContact{
-					ActorID: interaction.From,
-					Domain:  domain,
-				}
-				if fromActor != nil {
-					externalActors[interaction.From].DisplayName = fromActor.DisplayName
-				}
-			}
-			externalActors[interaction.From].InboundCount++
-			externalActors[interaction.From].TotalCount++
-
-			// Track internal-external relationship
-			if externalToInternal[interaction.From] == nil {
-				externalToInternal[interaction.From] = make(map[entity.ActorID]bool)
-			}
-			externalToInternal[interaction.From][interaction.To] = true
-
-			// Track domain stats
-			if domainStats[domain] == nil {
-				domainStats[domain] = &DomainStats{Domain: domain}
-			}
-			domainStats[domain].InboundCount++
-			domainStats[domain].TotalCount++
-			if domainToInternal[domain] == nil {
-				domainToInternal[domain] = make(map[entity.ActorID]bool)
-			}
-			domainToInternal[domain][interaction.To] = true
+			trackExternalInteraction(
+				interaction.To, interaction.From, fromActor,
+				false, // isOutbound
+				internalMetrics, internalToDomains,
+				externalActors, externalToInternal,
+				domainStats, domainToInternal,
+			)
 		}
 	}
 
@@ -351,6 +295,65 @@ func (a *Analyzer) TopExternalDomains(ctx context.Context, n int) (DomainStatsRe
 		return results.TopDomains, nil
 	}
 	return results.TopDomains[:n], nil
+}
+
+// trackExternalInteraction tracks metrics for an external interaction.
+// internalActor is the internal participant, externalActor is the external participant.
+// isOutbound indicates direction: true = internal->external, false = external->internal.
+func trackExternalInteraction(
+	internalActorID, externalActorID entity.ActorID,
+	externalActor *entity.Actor,
+	isOutbound bool,
+	internalMetrics map[entity.ActorID]*InternalExternalRatio,
+	internalToDomains map[entity.ActorID]map[string]int,
+	externalActors map[entity.ActorID]*ExternalContact,
+	externalToInternal map[entity.ActorID]map[entity.ActorID]bool,
+	domainStats map[string]*DomainStats,
+	domainToInternal map[string]map[entity.ActorID]bool,
+) {
+	internalMetrics[internalActorID].ExternalCount++
+	internalMetrics[internalActorID].TotalCount++
+
+	domain := extractDomain(externalActor)
+	internalToDomains[internalActorID][domain]++
+
+	// Track external actor
+	if externalActors[externalActorID] == nil {
+		externalActors[externalActorID] = &ExternalContact{
+			ActorID: externalActorID,
+			Domain:  domain,
+		}
+		if externalActor != nil {
+			externalActors[externalActorID].DisplayName = externalActor.DisplayName
+		}
+	}
+	if isOutbound {
+		externalActors[externalActorID].OutboundCount++
+	} else {
+		externalActors[externalActorID].InboundCount++
+	}
+	externalActors[externalActorID].TotalCount++
+
+	// Track internal-external relationship
+	if externalToInternal[externalActorID] == nil {
+		externalToInternal[externalActorID] = make(map[entity.ActorID]bool)
+	}
+	externalToInternal[externalActorID][internalActorID] = true
+
+	// Track domain stats
+	if domainStats[domain] == nil {
+		domainStats[domain] = &DomainStats{Domain: domain}
+	}
+	if isOutbound {
+		domainStats[domain].OutboundCount++
+	} else {
+		domainStats[domain].InboundCount++
+	}
+	domainStats[domain].TotalCount++
+	if domainToInternal[domain] == nil {
+		domainToInternal[domain] = make(map[entity.ActorID]bool)
+	}
+	domainToInternal[domain][internalActorID] = true
 }
 
 // extractDomain extracts the domain from an actor's email.

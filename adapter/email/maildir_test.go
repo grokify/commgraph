@@ -285,6 +285,7 @@ Body.
 	}
 
 	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
 	a := NewMaildirAdapter()
 	source := &testSource{location: tmpDir}
 

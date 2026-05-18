@@ -3,7 +3,6 @@ package session
 import (
 	"context"
 
-	"github.com/grokify/commgraph/entity"
 	"github.com/grokify/commgraph/identity"
 	"github.com/grokify/commgraph/storage"
 )
@@ -111,10 +110,4 @@ func SaveFromStore(store *storage.MemoryStore, resolver *identity.SCIMResolver, 
 	sess.FromResolver(resolver)
 
 	return sess.Save(path)
-}
-
-// AllThreads returns all threads from the MemoryStore.
-// This is a helper that calls the store's AllThreads method.
-func getAllThreads(store *storage.MemoryStore) []*entity.Thread {
-	return store.AllThreads()
 }
