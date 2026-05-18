@@ -1,0 +1,1763 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Communication graph analysis framework for organizational communication patterns">
+      
+      
+      
+        <link rel="canonical" href="https://grokify.github.io/commgraph/specs/PRD/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+    
+    
+      
+        <title>CommGraph Product Requirements Document - CommGraph</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#commgraph-product-requirements-document" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="CommGraph" class="md-header__button md-logo" aria-label="CommGraph" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            CommGraph
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              CommGraph Product Requirements Document
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/grokify/commgraph" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    grokify/commgraph
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../getting-started/installation/" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../guide/cli/" class="md-tabs__link">
+          
+  
+  
+  User Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../reference/architecture/" class="md-tabs__link">
+          
+  
+  
+  Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="CommGraph" class="md-nav__button md-logo" aria-label="CommGraph" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    CommGraph
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/grokify/commgraph" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    grokify/commgraph
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Getting Started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quick Start
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/enron-tutorial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Enron Tutorial
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    User Guide
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            User Guide
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CLI Reference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configuration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Analysis Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/export/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Export Formats
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/identity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Identity Resolution
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Reference
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Architecture
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/weight-profiles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Weight Profiles
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/roadmap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Roadmap
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problem-statement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem Statement
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#target-users" class="md-nav__link">
+    <span class="md-ellipsis">
+      Target Users
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Target Users">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#primary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Primary
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secondary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Secondary
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Use Cases
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Use Cases">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#uc-1-e-discovery-investigation" class="md-nav__link">
+    <span class="md-ellipsis">
+      UC-1: E-Discovery Investigation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uc-2-organizational-structure-discovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      UC-2: Organizational Structure Discovery
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uc-3-anomaly-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      UC-3: Anomaly Detection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uc-4-multi-platform-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      UC-4: Multi-Platform Analysis
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functional-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functional Requirements
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functional Requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fr-1-data-ingestion" class="md-nav__link">
+    <span class="md-ellipsis">
+      FR-1: Data Ingestion
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fr-2-identity-resolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      FR-2: Identity Resolution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fr-3-thread-reconstruction" class="md-nav__link">
+    <span class="md-ellipsis">
+      FR-3: Thread Reconstruction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fr-4-graph-construction" class="md-nav__link">
+    <span class="md-ellipsis">
+      FR-4: Graph Construction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fr-5-graph-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      FR-5: Graph Analysis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fr-6-export-and-visualization" class="md-nav__link">
+    <span class="md-ellipsis">
+      FR-6: Export and Visualization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#non-functional-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Non-Functional Requirements
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Non-Functional Requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nfr-1-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      NFR-1: Performance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nfr-2-reproducibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      NFR-2: Reproducibility
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nfr-3-auditability" class="md-nav__link">
+    <span class="md-ellipsis">
+      NFR-3: Auditability
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nfr-4-extensibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      NFR-4: Extensibility
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#weight-profiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Weight Profiles
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Weight Profiles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#influence-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Influence Profile
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#information-flow-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Information Flow Profile
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coordination-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Coordination Profile
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#success-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Success Metrics
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#out-of-scope-v1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Out of Scope (v1)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="commgraph-product-requirements-document">CommGraph Product Requirements Document<a class="headerlink" href="#commgraph-product-requirements-document" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>CommGraph is a communication graph analysis framework for analyzing organizational communication patterns across multiple platforms. The initial focus is email analysis with the Enron corpus as the reference dataset, with extensibility to Slack, Teams, and other platforms.</p>
+<h2 id="problem-statement">Problem Statement<a class="headerlink" href="#problem-statement" title="Permanent link">&para;</a></h2>
+<p>Organizations need to understand communication patterns for:</p>
+<ul>
+<li><strong>E-Discovery</strong>: Legal investigations requiring defensible, reproducible analysis</li>
+<li><strong>Private Analysis</strong>: Internal organizational intelligence and structure discovery</li>
+<li><strong>Security</strong>: Insider threat detection, anomaly identification</li>
+<li><strong>Research</strong>: Academic study of organizational communication dynamics</li>
+</ul>
+<p>Existing tools either:</p>
+<ul>
+<li>Collapse communication into oversimplified person-to-person edges, losing context</li>
+<li>Are platform-specific (email-only, Slack-only)</li>
+<li>Lack reproducibility required for legal defensibility</li>
+<li>Don't support configurable analysis profiles for different use cases</li>
+</ul>
+<h2 id="target-users">Target Users<a class="headerlink" href="#target-users" title="Permanent link">&para;</a></h2>
+<h3 id="primary">Primary<a class="headerlink" href="#primary" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>E-Discovery Analysts</strong>: Legal professionals requiring defensible, auditable communication analysis</li>
+<li><strong>Security Analysts</strong>: Teams investigating insider threats or anomalous communication patterns</li>
+<li><strong>Organizational Researchers</strong>: Academic or internal researchers studying communication dynamics</li>
+</ul>
+<h3 id="secondary">Secondary<a class="headerlink" href="#secondary" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Compliance Officers</strong>: Monitoring communication policy adherence</li>
+<li><strong>IT Administrators</strong>: Understanding information flow for access control decisions</li>
+</ul>
+<h2 id="use-cases">Use Cases<a class="headerlink" href="#use-cases" title="Permanent link">&para;</a></h2>
+<h3 id="uc-1-e-discovery-investigation">UC-1: E-Discovery Investigation<a class="headerlink" href="#uc-1-e-discovery-investigation" title="Permanent link">&para;</a></h3>
+<p>An e-discovery analyst needs to identify key custodians and communication patterns related to a specific matter.</p>
+<p><strong>Requirements:</strong></p>
+<ul>
+<li>Ingest email corpus with full provenance</li>
+<li>Identify central actors (by influence, information flow, or coordination)</li>
+<li>Reconstruct thread relationships even with missing headers</li>
+<li>Export results in standard legal formats (EDRM, Concordance)</li>
+<li>Maintain audit trail of all analysis steps</li>
+</ul>
+<h3 id="uc-2-organizational-structure-discovery">UC-2: Organizational Structure Discovery<a class="headerlink" href="#uc-2-organizational-structure-discovery" title="Permanent link">&para;</a></h3>
+<p>A researcher wants to understand the informal organizational structure compared to the formal hierarchy.</p>
+<p><strong>Requirements:</strong></p>
+<ul>
+<li>Map communication patterns to organizational units</li>
+<li>Identify cross-department bridges</li>
+<li>Detect isolated silos</li>
+<li>Compare formal hierarchy vs. communication-based structure</li>
+<li>Visualize results for presentation</li>
+</ul>
+<h3 id="uc-3-anomaly-detection">UC-3: Anomaly Detection<a class="headerlink" href="#uc-3-anomaly-detection" title="Permanent link">&para;</a></h3>
+<p>A security analyst needs to identify unusual communication patterns that may indicate insider threat.</p>
+<p><strong>Requirements:</strong></p>
+<ul>
+<li>Establish baseline communication patterns</li>
+<li>Detect deviations (sudden cross-team coordination, external entity spikes)</li>
+<li>Temporal analysis (burst detection, off-hours activity)</li>
+<li>Alert on configurable thresholds</li>
+</ul>
+<h3 id="uc-4-multi-platform-analysis">UC-4: Multi-Platform Analysis<a class="headerlink" href="#uc-4-multi-platform-analysis" title="Permanent link">&para;</a></h3>
+<p>An analyst needs to understand communication across email and Slack for a complete picture.</p>
+<p><strong>Requirements:</strong></p>
+<ul>
+<li>Unified identity resolution across platforms</li>
+<li>Normalized interaction model</li>
+<li>Combined graph analysis</li>
+<li>Platform-specific context preserved</li>
+</ul>
+<h2 id="functional-requirements">Functional Requirements<a class="headerlink" href="#functional-requirements" title="Permanent link">&para;</a></h2>
+<h3 id="fr-1-data-ingestion">FR-1: Data Ingestion<a class="headerlink" href="#fr-1-data-ingestion" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement</th>
+<th>Priority</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FR-1.1</td>
+<td>Ingest email from mbox, EML, PST formats</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>FR-1.2</td>
+<td>Parse MIME structure including attachments metadata</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>FR-1.3</td>
+<td>Extract all header fields (From, To, CC, BCC, Message-ID, References, In-Reply-To)</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>FR-1.4</td>
+<td>Preserve raw message for audit trail</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>FR-1.5</td>
+<td>Support incremental ingestion (new messages added without reprocessing)</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>FR-1.6</td>
+<td>Ingest Slack export format</td>
+<td>P2</td>
+</tr>
+<tr>
+<td>FR-1.7</td>
+<td>Ingest Microsoft Teams export format</td>
+<td>P2</td>
+</tr>
+</tbody>
+</table>
+<h3 id="fr-2-identity-resolution">FR-2: Identity Resolution<a class="headerlink" href="#fr-2-identity-resolution" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement</th>
+<th>Priority</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FR-2.1</td>
+<td>Resolve email address variants to canonical actor ID</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>FR-2.2</td>
+<td>Support alias definitions (multiple addresses per person)</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>FR-2.3</td>
+<td>Distinguish internal vs. external actors</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>FR-2.4</td>
+<td>Associate actors with organizational units</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>FR-2.5</td>
+<td>Support SCIM format for identity data</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>FR-2.6</td>
+<td>Cross-platform identity linking</td>
+<td>P2</td>
+</tr>
+</tbody>
+</table>
+<h3 id="fr-3-thread-reconstruction">FR-3: Thread Reconstruction<a class="headerlink" href="#fr-3-thread-reconstruction" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement</th>
+<th>Priority</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FR-3.1</td>
+<td>Reconstruct threads using In-Reply-To/References headers</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>FR-3.2</td>
+<td>Fallback to subject+date+participant heuristics when headers missing</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>FR-3.3</td>
+<td>Extract embedded message hints from body for threading</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>FR-3.4</td>
+<td>Configurable threading parameters (max age, participant overlap)</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>FR-3.5</td>
+<td>Report threading confidence scores</td>
+<td>P2</td>
+</tr>
+</tbody>
+</table>
+<h3 id="fr-4-graph-construction">FR-4: Graph Construction<a class="headerlink" href="#fr-4-graph-construction" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement</th>
+<th>Priority</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FR-4.1</td>
+<td>Model messages as first-class nodes</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>FR-4.2</td>
+<td>Preserve semantic edge types (TO, CC, BCC, MENTIONS)</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>FR-4.3</td>
+<td>Store timestamps on all edges</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>FR-4.4</td>
+<td>Support configurable weight profiles</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>FR-4.5</td>
+<td>Model threads and conversations as nodes</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>FR-4.6</td>
+<td>Support external entity nodes (domains, organizations)</td>
+<td>P1</td>
+</tr>
+</tbody>
+</table>
+<h3 id="fr-5-graph-analysis">FR-5: Graph Analysis<a class="headerlink" href="#fr-5-graph-analysis" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement</th>
+<th>Priority</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FR-5.1</td>
+<td>Compute centrality metrics (PageRank, betweenness, degree)</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>FR-5.2</td>
+<td>Detect communities (Louvain, label propagation)</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>FR-5.3</td>
+<td>Find shortest paths between actors</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>FR-5.4</td>
+<td>Temporal analysis (burst detection, trend identification)</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>FR-5.5</td>
+<td>Anomaly detection against baseline</td>
+<td>P2</td>
+</tr>
+<tr>
+<td>FR-5.6</td>
+<td>Similarity analysis via node embeddings</td>
+<td>P2</td>
+</tr>
+</tbody>
+</table>
+<h3 id="fr-6-export-and-visualization">FR-6: Export and Visualization<a class="headerlink" href="#fr-6-export-and-visualization" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement</th>
+<th>Priority</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FR-6.1</td>
+<td>Export to Neo4j Cypher format</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>FR-6.2</td>
+<td>Export to Gephi (GEXF/GraphML)</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>FR-6.3</td>
+<td>Export analysis results as JSON/CSV</td>
+<td>P0</td>
+</tr>
+<tr>
+<td>FR-6.4</td>
+<td>Export to EDRM XML for e-discovery tools</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>FR-6.5</td>
+<td>Generate summary reports</td>
+<td>P1</td>
+</tr>
+</tbody>
+</table>
+<h2 id="non-functional-requirements">Non-Functional Requirements<a class="headerlink" href="#non-functional-requirements" title="Permanent link">&para;</a></h2>
+<h3 id="nfr-1-performance">NFR-1: Performance<a class="headerlink" href="#nfr-1-performance" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement</th>
+<th>Target</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NFR-1.1</td>
+<td>Ingest rate</td>
+<td>&gt;= 10,000 messages/second</td>
+</tr>
+<tr>
+<td>NFR-1.2</td>
+<td>In-memory graph capacity</td>
+<td>&gt;= 1M nodes, 10M edges</td>
+</tr>
+<tr>
+<td>NFR-1.3</td>
+<td>Centrality computation (1M nodes)</td>
+<td>&lt; 60 seconds</td>
+</tr>
+</tbody>
+</table>
+<h3 id="nfr-2-reproducibility">NFR-2: Reproducibility<a class="headerlink" href="#nfr-2-reproducibility" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NFR-2.1</td>
+<td>All analysis algorithms must be deterministic given same input</td>
+</tr>
+<tr>
+<td>NFR-2.2</td>
+<td>Analysis configuration must be serializable and versioned</td>
+</tr>
+<tr>
+<td>NFR-2.3</td>
+<td>Results must include algorithm version and parameters used</td>
+</tr>
+</tbody>
+</table>
+<h3 id="nfr-3-auditability">NFR-3: Auditability<a class="headerlink" href="#nfr-3-auditability" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NFR-3.1</td>
+<td>Raw ingested data must be immutable</td>
+</tr>
+<tr>
+<td>NFR-3.2</td>
+<td>All transformations must be logged with timestamps</td>
+</tr>
+<tr>
+<td>NFR-3.3</td>
+<td>Hash verification for chain of custody</td>
+</tr>
+</tbody>
+</table>
+<h3 id="nfr-4-extensibility">NFR-4: Extensibility<a class="headerlink" href="#nfr-4-extensibility" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NFR-4.1</td>
+<td>New adapters addable without core changes</td>
+</tr>
+<tr>
+<td>NFR-4.2</td>
+<td>Custom weight profiles definable by users</td>
+</tr>
+<tr>
+<td>NFR-4.3</td>
+<td>Analysis algorithms pluggable</td>
+</tr>
+</tbody>
+</table>
+<h2 id="weight-profiles">Weight Profiles<a class="headerlink" href="#weight-profiles" title="Permanent link">&para;</a></h2>
+<p>The system supports configurable weight profiles for different analysis objectives:</p>
+<h3 id="influence-profile">Influence Profile<a class="headerlink" href="#influence-profile" title="Permanent link">&para;</a></h3>
+<p>Measures who has power/authority in communication patterns.</p>
+<table>
+<thead>
+<tr>
+<th>Edge Type</th>
+<th>Weight</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TO (direct)</td>
+<td>1.0</td>
+<td>Direct communication indicates relationship</td>
+</tr>
+<tr>
+<td>CC</td>
+<td>0.2</td>
+<td>Being CC'd is passive; low influence signal</td>
+</tr>
+<tr>
+<td>BCC</td>
+<td>0.4</td>
+<td>BCC suggests confidential influence</td>
+</tr>
+<tr>
+<td>Mention</td>
+<td>0.1</td>
+<td>Mentions are weak influence signals</td>
+</tr>
+<tr>
+<td>Reply</td>
+<td>0.3</td>
+<td>Replies indicate engagement</td>
+</tr>
+</tbody>
+</table>
+<h3 id="information-flow-profile">Information Flow Profile<a class="headerlink" href="#information-flow-profile" title="Permanent link">&para;</a></h3>
+<p>Measures how information propagates through the organization.</p>
+<table>
+<thead>
+<tr>
+<th>Edge Type</th>
+<th>Weight</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TO (direct)</td>
+<td>1.0</td>
+<td>Direct recipient receives information</td>
+</tr>
+<tr>
+<td>CC</td>
+<td>0.8</td>
+<td>CC recipients also receive full information</td>
+</tr>
+<tr>
+<td>BCC</td>
+<td>0.9</td>
+<td>BCC recipients receive information secretly</td>
+</tr>
+<tr>
+<td>Mention</td>
+<td>0.5</td>
+<td>Mentions spread awareness of actor</td>
+</tr>
+<tr>
+<td>Reply</td>
+<td>0.1</td>
+<td>Reply doesn't add new information flow</td>
+</tr>
+</tbody>
+</table>
+<h3 id="coordination-profile">Coordination Profile<a class="headerlink" href="#coordination-profile" title="Permanent link">&para;</a></h3>
+<p>Measures collaborative activity and project coordination.</p>
+<table>
+<thead>
+<tr>
+<th>Edge Type</th>
+<th>Weight</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TO (direct)</td>
+<td>0.5</td>
+<td>Direct messages may be FYI, not coordination</td>
+</tr>
+<tr>
+<td>CC</td>
+<td>0.8</td>
+<td>CC often indicates coordination/alignment</td>
+</tr>
+<tr>
+<td>BCC</td>
+<td>0.3</td>
+<td>BCC is secretive, not collaborative</td>
+</tr>
+<tr>
+<td>Mention</td>
+<td>0.2</td>
+<td>Mentions are weak coordination signal</td>
+</tr>
+<tr>
+<td>Reply</td>
+<td>1.0</td>
+<td>Replies indicate active collaboration</td>
+</tr>
+</tbody>
+</table>
+<h2 id="success-metrics">Success Metrics<a class="headerlink" href="#success-metrics" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Target</th>
+<th>Measurement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Thread reconstruction accuracy</td>
+<td>&gt;= 95%</td>
+<td>Against manually labeled subset</td>
+</tr>
+<tr>
+<td>Identity resolution accuracy</td>
+<td>&gt;= 99%</td>
+<td>Against known alias mappings</td>
+</tr>
+<tr>
+<td>Analysis reproducibility</td>
+<td>100%</td>
+<td>Same input + config = same output</td>
+</tr>
+<tr>
+<td>Enron corpus full analysis</td>
+<td>&lt; 10 minutes</td>
+<td>End-to-end on reference hardware</td>
+</tr>
+</tbody>
+</table>
+<h2 id="out-of-scope-v1">Out of Scope (v1)<a class="headerlink" href="#out-of-scope-v1" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Real-time streaming ingestion</li>
+<li>Natural language processing / semantic extraction</li>
+<li>Built-in visualization UI (rely on Gephi/external tools)</li>
+<li>Cloud-hosted service</li>
+<li>Multi-tenant access control</li>
+</ul>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://snap.stanford.edu/data/email-Enron.html">Enron Email Dataset (SNAP)</a></li>
+<li><a href="https://www.researchgate.net/publication/220556827">Graph Theoretic and Spectral Analysis of Enron Email Data</a></li>
+<li><a href="https://edrm.net/resources/frameworks-and-standards/edrm-xml/">EDRM XML Specification</a></li>
+<li><a href="https://datatracker.ietf.org/doc/html/rfc7644">SCIM Protocol (RFC 7644)</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/grokify/commgraph" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>
