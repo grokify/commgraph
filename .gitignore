@@ -1,0 +1,49 @@
+# Binaries
+/commgraph
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary
+*.test
+
+# Output of go coverage
+*.out
+coverage.html
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data
+data/
+*.db
+*.sqlite
+
+# Logs
+*.log
+audit/
+
+# Secrets
+.env
+.envrc
+
+# Ideation/scratch files
+IDEATION_CHAT*.md
+*.pem
+*.key
+credentials.json
+secrets.json
+
+# Build
+dist/
+bin/
