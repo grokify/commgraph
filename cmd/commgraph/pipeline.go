@@ -25,13 +25,13 @@ var pipelineCmd = &cobra.Command{
 }
 
 var (
-	pipelineSource      string
-	pipelineFormat      string
-	pipelineDomains     []string
-	pipelineProfile     string
-	pipelineAlgorithm   string
-	pipelineTopN        int
-	pipelineLoadEnron   bool
+	pipelineSource    string
+	pipelineFormat    string
+	pipelineDomains   []string
+	pipelineProfile   string
+	pipelineAlgorithm string
+	pipelineTopN      int
+	pipelineLoadEnron bool
 )
 
 func init() {
@@ -233,6 +233,81 @@ func runPipeline(cmd *cobra.Command, args []string) error {
 	}
 
 	fmt.Printf("\nAnalysis completed in %v\n", analysisDuration)
+
+	// Run community detection
+	fmt.Println("\nDetecting communities...")
+	communityStart := time.Now()
+	communities, err := analyzer.Louvain(ctx, 1.0)
+	if err != nil {
+		fmt.Printf("  Community detection failed: %v\n", err)
+	} else {
+		fmt.Printf("  Found %d communities (modularity: %.4f)\n", len(communities.Communities), communities.Modularity)
+		fmt.Printf("  Top 5 communities:\n")
+		for _, c := range communities.Top(5) {
+			fmt.Printf("    Community %d: %d members (density: %.3f)\n", c.ID, c.Size, c.Density)
+		}
+		fmt.Printf("  Completed in %v\n", time.Since(communityStart))
+	}
+
+	// Run burst detection
+	fmt.Println("\nDetecting activity bursts...")
+	burstStart := time.Now()
+	bursts, err := analyzer.BurstDetection(ctx, 2.0, 24*time.Hour)
+	if err != nil {
+		fmt.Printf("  Burst detection failed: %v\n", err)
+	} else {
+		fmt.Printf("  Found %d bursts (>2 std devs above mean)\n", len(bursts))
+		if len(bursts) > 0 {
+			fmt.Printf("  Top bursts:\n")
+			for i, b := range bursts {
+				if i >= 5 {
+					break
+				}
+				fmt.Printf("    %s: z-score=%.2f, peak=%d messages\n",
+					b.Peak.Format("2006-01-02"), b.ZScore, b.PeakCount)
+			}
+		}
+		fmt.Printf("  Completed in %v\n", time.Since(burstStart))
+	}
+
+	// Run path analysis
+	fmt.Println("\nAnalyzing network paths...")
+	pathStart := time.Now()
+	avgPath, err := analyzer.AveragePathLength(ctx, 100)
+	if err != nil {
+		fmt.Printf("  Path analysis failed: %v\n", err)
+	} else {
+		diameter, _ := analyzer.GraphDiameter(ctx, 100)
+		components, _ := analyzer.ConnectedComponents(ctx)
+		fmt.Printf("  Average path length: %.2f hops\n", avgPath)
+		fmt.Printf("  Graph diameter: %d hops\n", diameter)
+		fmt.Printf("  Connected components: %d\n", len(components))
+		fmt.Printf("  Completed in %v\n", time.Since(pathStart))
+	}
+
+	// Run bridge detection
+	if communities != nil {
+		fmt.Println("\nDetecting bridge actors...")
+		bridgeStart := time.Now()
+		bridges, err := analyzer.DetectBridges(ctx, communities)
+		if err != nil {
+			fmt.Printf("  Bridge detection failed: %v\n", err)
+		} else {
+			fmt.Printf("  Top 5 bridges (cross-community connectors):\n")
+			for _, b := range bridges.Top(5) {
+				name := b.DisplayName
+				if name == "" {
+					name = string(b.ActorID)
+				}
+				if len(name) > 30 {
+					name = name[:27] + "..."
+				}
+				fmt.Printf("    %s: score=%.2f, %d communities, %d external edges\n",
+					name, b.BridgeScore, b.CommunitiesConnected, b.ExternalEdges)
+			}
+			fmt.Printf("  Completed in %v\n", time.Since(bridgeStart))
+		}
+	}
 
 	return nil
 }

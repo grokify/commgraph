@@ -29,11 +29,11 @@ var ingestEmailCmd = &cobra.Command{
 }
 
 var (
-	ingestSource   string
-	ingestFormat   string
-	ingestDomains  []string
-	ingestOutput   string
-	ingestVerbose  bool
+	ingestSource  string
+	ingestFormat  string
+	ingestDomains []string
+	ingestOutput  string
+	ingestVerbose bool
 )
 
 func init() {

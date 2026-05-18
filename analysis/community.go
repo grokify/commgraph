@@ -21,8 +21,8 @@ type Community struct {
 
 // CommunityResults contains the results of community detection.
 type CommunityResults struct {
-	Communities []Community        `json:"communities"`
-	Modularity  float64            `json:"modularity"`
+	Communities []Community            `json:"communities"`
+	Modularity  float64                `json:"modularity"`
 	Membership  map[entity.ActorID]int `json:"membership"` // Actor -> Community ID
 }
 
@@ -142,9 +142,9 @@ func (a *Analyzer) Louvain(ctx context.Context, resolution float64) (*CommunityR
 
 // louvainGraph is an internal graph structure for Louvain algorithm.
 type louvainGraph struct {
-	nodes     map[entity.ActorID]bool
-	neighbors map[entity.ActorID]map[entity.ActorID]float64
-	degree    map[entity.ActorID]float64
+	nodes       map[entity.ActorID]bool
+	neighbors   map[entity.ActorID]map[entity.ActorID]float64
+	degree      map[entity.ActorID]float64
 	totalWeight float64
 }
 
@@ -174,7 +174,7 @@ func (g *louvainGraph) addEdge(from, to entity.ActorID, weight float64) {
 	g.totalWeight += weight
 }
 
-func (g *louvainGraph) modularityDelta(node entity.ActorID, fromComm, toComm int, membership map[entity.ActorID]int, resolution float64) float64 {
+func (g *louvainGraph) modularityDelta(node entity.ActorID, _, toComm int, membership map[entity.ActorID]int, resolution float64) float64 {
 	if g.totalWeight == 0 {
 		return 0
 	}
@@ -250,7 +250,7 @@ func (g *louvainGraph) communityDensity(members []entity.ActorID) float64 {
 	return internalEdges / maxEdges
 }
 
-func (g *louvainGraph) communityConductance(members []entity.ActorID, membership map[entity.ActorID]int) float64 {
+func (g *louvainGraph) communityConductance(members []entity.ActorID, _ map[entity.ActorID]int) float64 {
 	if len(members) == 0 {
 		return 0
 	}

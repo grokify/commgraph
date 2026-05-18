@@ -3,9 +3,10 @@ package identity
 import (
 	"strings"
 
-	"github.com/enrondata/enron-people"
-	"github.com/grokify/commgraph/entity"
+	enronpeople "github.com/enrondata/enron-people"
 	"github.com/grokify/goauth/scim"
+
+	"github.com/grokify/commgraph/entity"
 )
 
 // LoadEnronPeople loads all known Enron employees into the resolver.

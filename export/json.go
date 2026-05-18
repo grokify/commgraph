@@ -18,11 +18,11 @@ type CentralityExport struct {
 
 // Metadata contains export metadata.
 type Metadata struct {
-	ExportedAt time.Time         `json:"exported_at"`
-	Profile    string            `json:"profile"`
-	Algorithm  string            `json:"algorithm"`
-	Parameters map[string]any    `json:"parameters,omitempty"`
-	Stats      map[string]any    `json:"stats,omitempty"`
+	ExportedAt time.Time      `json:"exported_at"`
+	Profile    string         `json:"profile"`
+	Algorithm  string         `json:"algorithm"`
+	Parameters map[string]any `json:"parameters,omitempty"`
+	Stats      map[string]any `json:"stats,omitempty"`
 }
 
 // JSONExporter exports results to JSON format.
@@ -86,6 +86,42 @@ func (e *JSONExporter) ExportThreads(w io.Writer, threads any, meta Metadata) er
 	}{
 		Metadata: meta,
 		Threads:  threads,
+	}
+	export.Metadata.ExportedAt = time.Now()
+
+	encoder := json.NewEncoder(w)
+	if e.Pretty {
+		encoder.SetIndent("", "  ")
+	}
+	return encoder.Encode(export)
+}
+
+// ExportCommunities exports community detection results to JSON.
+func (e *JSONExporter) ExportCommunities(w io.Writer, communities []analysis.Community, meta Metadata) error {
+	export := struct {
+		Metadata    Metadata             `json:"metadata"`
+		Communities []analysis.Community `json:"communities"`
+	}{
+		Metadata:    meta,
+		Communities: communities,
+	}
+	export.Metadata.ExportedAt = time.Now()
+
+	encoder := json.NewEncoder(w)
+	if e.Pretty {
+		encoder.SetIndent("", "  ")
+	}
+	return encoder.Encode(export)
+}
+
+// ExportBursts exports burst detection results to JSON.
+func (e *JSONExporter) ExportBursts(w io.Writer, bursts []analysis.Burst, meta Metadata) error {
+	export := struct {
+		Metadata Metadata         `json:"metadata"`
+		Bursts   []analysis.Burst `json:"bursts"`
+	}{
+		Metadata: meta,
+		Bursts:   bursts,
 	}
 	export.Metadata.ExportedAt = time.Now()
 

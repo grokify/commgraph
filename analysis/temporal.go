@@ -47,10 +47,10 @@ type TemporalResults struct {
 
 // ActorActivityResults contains activity metrics for actors over time.
 type ActorActivityResults struct {
-	Window  TimeWindow                  `json:"window"`
-	Actors  map[entity.ActorID][]ActivityPoint `json:"actors"`
-	TopSenders []ActorActivity            `json:"top_senders"`
-	TopReceivers []ActorActivity          `json:"top_receivers"`
+	Window       TimeWindow                         `json:"window"`
+	Actors       map[entity.ActorID][]ActivityPoint `json:"actors"`
+	TopSenders   []ActorActivity                    `json:"top_senders"`
+	TopReceivers []ActorActivity                    `json:"top_receivers"`
 }
 
 // ActorActivity represents an actor's activity metrics.
