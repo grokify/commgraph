@@ -9,6 +9,8 @@ github.com/clipperhouse/uax29/v2 v2.7.0/go.mod h1:EFJ2TJMRUaplDxHKj1qAEhCtQPW2tJ
 github.com/cpuguy83/go-md2man/v2 v2.0.6/go.mod h1:oOW0eioCTA6cOiMLiUPZOpcVxMig6NIQQ7OS05n1F4g=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
+github.com/enrondata/enron-people v0.1.1 h1:U17ETdT1OiIc8gLMeF+S5SAbc3WPEGGvc4/WOgBeMSU=
+github.com/enrondata/enron-people v0.1.1/go.mod h1:hnDKmvwi0Q2Oe+hvI4JLW0sBosiDBmlvU6+jkf6W0MU=
 github.com/fatih/color v1.19.0 h1:Zp3PiM21/9Ld6FzSKyL5c/BULoe/ONr9KlbYVOfG8+w=
 github.com/fatih/color v1.19.0/go.mod h1:zNk67I0ZUT1bEGsSGyCZYZNrHuTkJJB+r6Q9VuMi0LE=
 github.com/go-test/deep v1.1.0 h1:WOcxcdHcvdgThNXjw0t76K42FXTU7HpNQWHpA2HHNlg=
@@ -17,6 +19,8 @@ github.com/goccy/go-json v0.10.6 h1:p8HrPJzOakx/mn/bQtjgNjdTcN+/S6FcG2CTtQOrHVU=
 github.com/goccy/go-json v0.10.6/go.mod h1:oq7eo15ShAhp70Anwd5lgX2pLfOS3QCiwU/PULtXL6M=
 github.com/gogs/chardet v0.0.0-20211120154057-b7413eaefb8f h1:3BSP1Tbs2djlpprl7wCLuiqMaUh5SJkkzI2gDs+FgLs=
 github.com/gogs/chardet v0.0.0-20211120154057-b7413eaefb8f/go.mod h1:Pcatq5tYkCW2Q6yrR2VRHlbHpZ/R4/7qyL1TCF7vl14=
+github.com/grokify/goauth v0.23.30 h1:hQU5wLwnQcTz5Q2AAsqD9+ubdKJ8hvk2oXMuRErUU0E=
+github.com/grokify/goauth v0.23.30/go.mod h1:CCPrQOi1aE9FElsZiORlIFIW99/CUEh46iwRnm7+hpE=
 github.com/grokify/mogo v0.74.5 h1:UNS4Ox2kJ4NTt6ySAT3QbDuRHcThcwDnf5iFQ+iFgac=
 github.com/grokify/mogo v0.74.5/go.mod h1:Rz4OegG82u42eOpY+VKM0FtX2UtYDVpMvdUTNIPkYnA=
 github.com/huandu/xstrings v1.5.0 h1:2ag3IFq9ZDANvthTwTiqSSZLjDc+BedvHPAp5tJy2TI=

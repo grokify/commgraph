@@ -3,8 +3,8 @@ module github.com/grokify/commgraph
 go 1.26.0
 
 require (
-	github.com/enrondata/enron-people v0.0.0
-	github.com/grokify/goauth v0.26.5
+	github.com/enrondata/enron-people v0.1.1
+	github.com/grokify/goauth v0.23.30
 	github.com/grokify/mogo v0.74.5
 	github.com/jhillyerd/enmime v1.3.0
 	github.com/plexusone/omniretrieve v0.2.0
@@ -38,6 +38,4 @@ require (
 	golang.org/x/text v0.37.0 // indirect
 )
 
-replace github.com/enrondata/enron-people => ../../enrondata/enron-people
-
-replace github.com/grokify/goauth => ../../grokify/goauth
+// replace github.com/enrondata/enron-people => ../../enrondata/enron-people
