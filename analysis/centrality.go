@@ -292,7 +292,7 @@ func (a *Analyzer) toResults(scores map[entity.ActorID]float64) CentralityResult
 			Score:   score,
 		}
 		if a.resolver != nil {
-			if actorInfo, err := a.resolver.GetActor(actor); err == nil {
+			if actorInfo, err := a.resolver.GetActor(actor); err == nil && actorInfo != nil {
 				result.DisplayName = actorInfo.DisplayName
 			}
 		}

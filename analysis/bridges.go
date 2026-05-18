@@ -114,7 +114,7 @@ func (a *Analyzer) DetectBridges(ctx context.Context, communities *CommunityResu
 		}
 
 		if a.resolver != nil {
-			if actorInfo, err := a.resolver.GetActor(actor); err == nil {
+			if actorInfo, err := a.resolver.GetActor(actor); err == nil && actorInfo != nil {
 				result.DisplayName = actorInfo.DisplayName
 			}
 		}
@@ -195,7 +195,7 @@ func (a *Analyzer) StructuralHoles(ctx context.Context) (BridgeResults, error) {
 		}
 
 		if a.resolver != nil {
-			if actorInfo, err := a.resolver.GetActor(actor); err == nil {
+			if actorInfo, err := a.resolver.GetActor(actor); err == nil && actorInfo != nil {
 				result.DisplayName = actorInfo.DisplayName
 			}
 		}
@@ -292,7 +292,7 @@ func (a *Analyzer) DetectGatekeepers(ctx context.Context, communities *Community
 		}
 
 		if a.resolver != nil {
-			if actorInfo, err := a.resolver.GetActor(actor); err == nil {
+			if actorInfo, err := a.resolver.GetActor(actor); err == nil && actorInfo != nil {
 				result.DisplayName = actorInfo.DisplayName
 			}
 		}
