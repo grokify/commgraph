@@ -560,10 +560,12 @@ Issues discovered during development and testing that should be addressed.
   - Test Actor, Message, Interaction, Thread types
   - Test EdgeType methods
 
-- [ ] **IMP-8**: Add unit tests for adapter/email package
-  - Test mbox parsing
-  - Test maildir parsing
-  - Test header extraction
+- [x] **IMP-8**: Add unit tests for adapter/email package (26 tests)
+  - Test mbox parsing and ingestion
+  - Test maildir parsing with nested folders
+  - Test header extraction (parseAddress, parseAddressList, parseReferences)
+  - Test helper functions (cleanMessageID, truncate, extractEmailMentions, extractUniqueDomains)
+  - Test cancellation and error handling
 
 - [ ] **IMP-9**: Add unit tests for identity package
   - Test SCIMResolver alias merging
@@ -580,10 +582,14 @@ Issues discovered during development and testing that should be addressed.
   - Test community detection
   - Test path analysis
 
-- [ ] **IMP-12**: Add unit tests for threading package
-  - Test thread reconstruction
-  - Test subject normalization
+- [x] **IMP-12**: Add unit tests for threading package (19 tests)
+  - Test DefaultConfig and NewReconstructor
+  - Test thread reconstruction (single, reply chain, multiple threads, deep threads)
+  - Test participant extraction and thread dates
+  - Test ComputeStats function
+  - Test messageAdapter interface methods
 
-- [ ] **IMP-13**: Add integration test with small sample dataset
-  - End-to-end pipeline test
-  - Known expected results
+- [x] **IMP-13**: Add integration test with small sample dataset (3 tests)
+  - End-to-end pipeline test (ingest -> resolve -> thread -> analyze -> export)
+  - Session round-trip test (save/load with data verification)
+  - Known results test (star graph with expected centrality results)
