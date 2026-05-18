@@ -240,10 +240,11 @@ This roadmap defines the implementation phases for CommGraph, a communication gr
   - Invalidation on new data
   - Profile-specific caches
 
-- [ ] **P3-5**: Configuration file support
-  - YAML configuration parsing
-  - Environment variable overrides
+- [x] **P3-5**: Configuration file support
+  - YAML configuration parsing via viper
+  - Environment variable overrides (COMMGRAPH_* prefix)
   - Configuration validation
+  - Implemented in `config/` package
 
 - [ ] **P3-6**: Implement EDRM export
   - `export/edrm.go`: EDRM XML format
