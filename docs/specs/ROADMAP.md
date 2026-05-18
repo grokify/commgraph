@@ -44,7 +44,7 @@ This roadmap defines the implementation phases for CommGraph, a communication gr
   - `weight/profiles.go`: Built-in profiles (Influence, InformationFlow, Coordination)
   - Unit tests for weight calculations
 
-- [ ] **P0-5**: Set up CI/CD
+- [x] **P0-5**: Set up CI/CD
   - GitHub Actions workflow for test, lint, build
   - golangci-lint configuration
   - Test coverage reporting
@@ -76,13 +76,13 @@ This roadmap defines the implementation phases for CommGraph, a communication gr
   - Extract all required headers
   - Unit tests with sample data
 
-- [ ] **P1-2**: Implement identity resolver with enron-people
+- [x] **P1-2**: Implement identity resolver with enron-people
   - `identity/scim.go`: Load SCIM-format identity data
   - `identity/resolver.go`: Resolver implementation
   - Integrate `github.com/enrondata/enron-people`
   - Support alias resolution and merging (multiple email variations → single actor)
   - Internal/external classification
-  - **Note**: Current implementation auto-creates actors but doesn't merge aliases (e.g., "Jeff Skilling" and "jskilli@enron.com" create separate actors)
+  - `identity/enron.go`: LoadEnronPeople loads curated SCIM data and custodians JSON
 
 - [x] **P1-3**: Integrate thread reconstruction
   - `threading/reconstructor.go`: Wrap `mogo/net/mailutil/threading`
@@ -144,48 +144,57 @@ This roadmap defines the implementation phases for CommGraph, a communication gr
 
 ### Tasks
 
-- [ ] **P2-1**: Implement community detection
+- [x] **P2-1**: Implement community detection
   - `analysis/community.go`: Louvain algorithm
   - Label propagation as alternative
   - Community membership output
   - Modularity score calculation
 
-- [ ] **P2-2**: Implement temporal analysis
+- [x] **P2-2**: Implement temporal analysis
   - `analysis/temporal.go`: Time-windowed graph construction
   - Burst detection (sudden activity spikes)
   - Trend analysis (communication volume over time)
   - Response latency metrics
 
-- [ ] **P2-3**: Implement path analysis
-  - `analysis/path.go`: Shortest path between actors
+- [x] **P2-3**: Implement path analysis
+  - `analysis/paths.go`: Shortest path between actors
   - All paths up to N hops
-  - Path weight by profile
+  - Average path length, graph diameter
+  - Connected components, ego networks
 
-- [ ] **P2-4**: Implement cross-department bridge detection
-  - Identify actors connecting different departments
-  - Betweenness centrality filtered by department boundaries
+- [x] **P2-4**: Implement cross-department bridge detection
+  - `analysis/bridges.go`: Identify actors connecting different communities
+  - Structural holes analysis (Burt's constraint)
+  - Gatekeeper detection
   - Report format for bridge actors
 
-- [ ] **P2-5**: Implement external entity analysis
+- [x] **P2-5**: Implement external entity analysis
+  - `analysis/external.go`: External contact analysis
   - Identify heavily-referenced external domains
   - External actor centrality (who talks to outsiders most)
   - Domain-level aggregation
+  - Boundary spanner detection
 
-- [ ] **P2-6**: Implement Gephi export
+- [x] **P2-6**: Implement Gephi export
   - `export/gephi.go`: GEXF format export
   - Node attributes (department, internal/external)
   - Edge attributes (type, weight, timestamp)
-  - Support for temporal dynamic graphs
+  - Community-colored node visualization
 
-- [ ] **P2-7**: Implement Neo4j export
-  - `export/cypher.go`: Generate Cypher CREATE statements
+- [x] **P2-7**: Implement Neo4j export
+  - `export/neo4j.go`: Generate Cypher CREATE statements
+  - Schema creation (constraints, indexes)
   - Batch import format
   - Include all node and edge properties
 
-- [ ] **P2-8**: Analysis CLI enhancements
+- [x] **P2-8**: Analysis CLI enhancements
   - `commgraph analyze community` command
   - `commgraph analyze temporal` command
   - `commgraph analyze bridges` command
+  - `commgraph analyze paths` command
+  - `commgraph analyze external` command
+  - `commgraph export gephi` command
+  - `commgraph export neo4j` command
   - Profile selection for all commands
 
 ### Deliverables
@@ -487,20 +496,21 @@ Issues discovered during development and testing that should be addressed.
 
 **Tasks**:
 
-- [ ] **IMP-1**: Load enron-people SCIM data on startup
+- [x] **IMP-1**: Load enron-people SCIM data on startup
   - Parse SCIM JSON files from enron-people repository
   - Build alias map (all email variations → canonical actor ID)
   - Pre-populate resolver with known identities
+  - Added `--enron` flag to pipeline command
 
-- [ ] **IMP-2**: Implement alias merging in SCIMResolver
-  - Add `MergeAliases(canonical ActorID, aliases []string)` method
-  - Update `ResolveOrCreate` to check alias map before creating new actor
-  - Handle case where auto-created actor should be merged with later-discovered canonical
+- [x] **IMP-2**: Implement alias merging in SCIMResolver
+  - `LoadActor` merges emails when actor with same ID exists
+  - `ResolveOrCreate` checks alias map before creating new actor
+  - Loads both curated SCIM data (14 key people) and custodians JSON (148 employees)
 
-- [ ] **IMP-3**: Add identity merge CLI command
-  - `commgraph identity merge --scim-dir=<path>` to load identity data
+- [ ] **IMP-3**: Add identity CLI commands
   - `commgraph identity list` to show resolved actors
   - `commgraph identity aliases <actor-id>` to show all aliases for an actor
+  - `commgraph identity stats` to show resolution statistics
 
 ### CLI State Persistence (Priority: Medium)
 
@@ -542,12 +552,38 @@ Issues discovered during development and testing that should be addressed.
 
 ### Test Coverage (Priority: Medium)
 
-**Issue**: Most packages lack test files.
+**Issue**: Most packages lack test files. Only `weight` package has tests.
 
 **Tasks**:
 
-- [ ] **IMP-7**: Add unit tests for adapter/email package
-- [ ] **IMP-8**: Add unit tests for identity package
-- [ ] **IMP-9**: Add unit tests for storage package
-- [ ] **IMP-10**: Add unit tests for analysis package
-- [ ] **IMP-11**: Add integration test with small sample dataset
+- [ ] **IMP-7**: Add unit tests for entity package
+  - Test Actor, Message, Interaction, Thread types
+  - Test EdgeType methods
+
+- [ ] **IMP-8**: Add unit tests for adapter/email package
+  - Test mbox parsing
+  - Test maildir parsing
+  - Test header extraction
+
+- [ ] **IMP-9**: Add unit tests for identity package
+  - Test SCIMResolver alias merging
+  - Test ResolveOrCreate behavior
+  - Test internal/external classification
+
+- [ ] **IMP-10**: Add unit tests for storage package
+  - Test MemoryStore operations
+  - Test query filtering
+  - Test stats calculation
+
+- [ ] **IMP-11**: Add unit tests for analysis package
+  - Test centrality calculations with known graphs
+  - Test community detection
+  - Test path analysis
+
+- [ ] **IMP-12**: Add unit tests for threading package
+  - Test thread reconstruction
+  - Test subject normalization
+
+- [ ] **IMP-13**: Add integration test with small sample dataset
+  - End-to-end pipeline test
+  - Known expected results
