@@ -344,6 +344,17 @@ func (s *MemoryStore) AllActors() []*entity.Actor {
 	return result
 }
 
+// AllThreads returns all threads (for session persistence).
+func (s *MemoryStore) AllThreads() []*entity.Thread {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	result := make([]*entity.Thread, 0, len(s.threads))
+	for _, thread := range s.threads {
+		result = append(result, thread)
+	}
+	return result
+}
+
 func containsEdgeType(types []entity.EdgeType, t entity.EdgeType) bool {
 	for _, et := range types {
 		if et == t {
