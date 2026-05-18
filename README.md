@@ -54,17 +54,31 @@ go install github.com/grokify/commgraph/cmd/commgraph@latest
 ## Quick Start
 
 ```bash
-# Ingest email corpus
-commgraph ingest email --format=mbox --source=/path/to/mailbox.mbox
+# Run full pipeline (ingest + analyze)
+commgraph pipeline \
+    --source=/path/to/emails \
+    --format=maildir \
+    --internal-domains=company.com \
+    --profile=influence \
+    --top=20
 
-# Run centrality analysis
+# Or use separate commands:
+commgraph ingest --source=/path/to/mailbox.mbox --format=mbox
 commgraph analyze centrality --profile=influence
-
-# Export to Gephi
 commgraph export gephi --output=graph.gexf
 ```
 
 ## Documentation
+
+Full documentation is available at [grokify.github.io/commgraph](https://grokify.github.io/commgraph).
+
+- [Installation](docs/getting-started/installation.md)
+- [Quick Start](docs/getting-started/quickstart.md)
+- [Enron Tutorial](docs/getting-started/enron-tutorial.md)
+- [CLI Reference](docs/guide/cli.md)
+- [Configuration](docs/guide/configuration.md)
+
+### Specifications
 
 - [Product Requirements](docs/specs/PRD.md)
 - [Technical Requirements](docs/specs/TRD.md)
