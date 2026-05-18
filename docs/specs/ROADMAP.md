@@ -507,26 +507,25 @@ Issues discovered during development and testing that should be addressed.
   - `ResolveOrCreate` checks alias map before creating new actor
   - Loads both curated SCIM data (14 key people) and custodians JSON (148 employees)
 
-- [ ] **IMP-3**: Add identity CLI commands
-  - `commgraph identity list` to show resolved actors
+- [x] **IMP-3**: Add identity CLI commands
+  - `commgraph identity list` to show resolved actors (with --internal, --external filters)
   - `commgraph identity aliases <actor-id>` to show all aliases for an actor
   - `commgraph identity stats` to show resolution statistics
 
-### CLI State Persistence (Priority: Medium)
+### CLI State Persistence (Priority: Medium) - RESOLVED
 
 **Issue**: Separate CLI commands (ingest, analyze, export) don't share state because they run in separate processes.
 
-**Current Workaround**: Use the `pipeline` command which runs all operations in a single process.
-
-**Long-term Solution**: Phase 3 (P3-1) implements BadgerDB persistence which will allow state sharing across commands.
+**Solution**: Session file persistence implemented via `session` package.
 
 **Tasks**:
 
-- [ ] **IMP-4**: Add session file for lightweight state sharing
-  - Save in-memory state to JSON/gob file after ingest
+- [x] **IMP-4**: Add session file for lightweight state sharing
+  - `session` package with `Session`, `Load`, `Save`, `ToMemoryStore`, `ToResolver` functions
+  - Save in-memory state to JSON file after ingest
   - Load state file in analyze/export commands
   - `--session=<path>` flag to specify session file
-  - Automatic session file in current directory (`.commgraph-session`)
+  - Automatic session file at `.commgraph-session.json`
 
 ### Thread Reconstruction (Priority: Low)
 
@@ -550,15 +549,16 @@ Issues discovered during development and testing that should be addressed.
   - Identify orphan messages that should be part of threads
   - `commgraph analyze threading-quality` command
 
-### Test Coverage (Priority: Medium)
+### Test Coverage (Priority: Medium) - COMPLETE
 
-**Issue**: Most packages lack test files. Only `weight` package has tests.
+**Status**: 142 tests across all packages.
 
 **Tasks**:
 
-- [ ] **IMP-7**: Add unit tests for entity package
+- [x] **IMP-7**: Add unit tests for entity package (13 tests)
   - Test Actor, Message, Interaction, Thread types
   - Test EdgeType methods
+  - Test AllRecipients, AllParticipants, Duration helpers
 
 - [x] **IMP-8**: Add unit tests for adapter/email package (26 tests)
   - Test mbox parsing and ingestion
@@ -567,20 +567,24 @@ Issues discovered during development and testing that should be addressed.
   - Test helper functions (cleanMessageID, truncate, extractEmailMentions, extractUniqueDomains)
   - Test cancellation and error handling
 
-- [ ] **IMP-9**: Add unit tests for identity package
+- [x] **IMP-9**: Add unit tests for identity package (13 tests)
   - Test SCIMResolver alias merging
   - Test ResolveOrCreate behavior
   - Test internal/external classification
+  - Test extractDisplayName and toTitleCase helpers
 
-- [ ] **IMP-10**: Add unit tests for storage package
-  - Test MemoryStore operations
-  - Test query filtering
+- [x] **IMP-10**: Add unit tests for storage package (13 tests)
+  - Test MemoryStore operations (CRUD for all entity types)
+  - Test query filtering (time, platform, edge types)
   - Test stats calculation
+  - Test batch operations and close behavior
 
-- [ ] **IMP-11**: Add unit tests for analysis package
-  - Test centrality calculations with known graphs
-  - Test community detection
-  - Test path analysis
+- [x] **IMP-11**: Add unit tests for analysis package (35 tests)
+  - Test centrality calculations (PageRank, Degree, InDegree, OutDegree, Betweenness)
+  - Test community detection (Louvain, LabelPropagation)
+  - Test temporal analysis (Timeline, BurstDetection)
+  - Test path analysis (ShortestPath, AveragePathLength, GraphDiameter, ConnectedComponents)
+  - Test bridge detection (DetectBridges, StructuralHoles)
 
 - [x] **IMP-12**: Add unit tests for threading package (19 tests)
   - Test DefaultConfig and NewReconstructor
