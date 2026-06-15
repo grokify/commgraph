@@ -7,7 +7,7 @@ require (
 	github.com/grokify/goauth v0.23.30
 	github.com/grokify/mogo v0.74.5
 	github.com/jhillyerd/enmime v1.3.0
-	github.com/plexusone/omniretrieve v0.2.0
+	github.com/plexusone/omniretrieve v0.3.0
 	github.com/spf13/cobra v1.10.2
 	github.com/spf13/viper v1.21.0
 )

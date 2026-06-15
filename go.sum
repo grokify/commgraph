@@ -61,8 +61,8 @@ github.com/pelletier/go-toml/v2 v2.2.4 h1:mye9XuhQ6gvn5h28+VilKrrPoQVanw5PMw/TB0
 github.com/pelletier/go-toml/v2 v2.2.4/go.mod h1:2gIqNv+qfxSVS7cM2xJQKtLSTLUE9V8t9Stt+h56mCY=
 github.com/pkg/errors v0.9.1 h1:FEBLx1zS214owpjy7qsBeixbURkuhQAwrK5UwLGTwt4=
 github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
-github.com/plexusone/omniretrieve v0.2.0 h1:Tx9EQJtE4d/i3CKjakCmcM1xNrh6cwCMT4EY5THwAUU=
-github.com/plexusone/omniretrieve v0.2.0/go.mod h1:JGRe0C7pUOp5mc1Uah+vQ8JcbLzBvTabfnzx9SFnC2c=
+github.com/plexusone/omniretrieve v0.3.0 h1:0Nm+hrt7Qj3ziDlKg2JlEgEmY7+G9ndYDf04s4MsfbA=
+github.com/plexusone/omniretrieve v0.3.0/go.mod h1:Ti/SzUb7oeqqE4ZS7iEk/dIXonCG7/jgv4g/IGRq4C4=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/rogpeppe/go-internal v1.9.0 h1:73kH8U+JUqXU8lRuOHeVHaa/SZPifC7BkcraZVejAe8=
